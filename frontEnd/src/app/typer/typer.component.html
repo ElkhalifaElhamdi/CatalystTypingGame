@@ -1,0 +1,47 @@
+<ol class="Games">
+  <li *ngFor="let game of games"
+      [class.selected]="game === selectedGame"
+      (click)="onSelect(game)">
+    {{game.name}}
+  </li>
+</ol>
+
+<div *ngIf="selectedGame">
+  <h2>{{selectedGame.name}} game</h2>
+  <h2>{{writingGenrePrompt}}</h2>
+
+  <div *ngIf="selectedGame.name == 'UserInteractive'">
+    <ul class="MyWritingGenres">
+      <li (click)="onSelectPsychology()"> Psychology </li>
+      <li (click)="onSelectBiology()"> Biology </li>
+      <li (click)="onSelectEconomy()"> Economy </li>
+      <li (click)="onSelectFiction()"> Fiction </li>
+    </ul>
+  </div>
+
+  <div *ngIf="selectedGenre">
+    <h2>{{intro}}</h2>
+    <h2>{{chosenPassage}}</h2>
+    <input value="" id="userInput" (keypress)="startTimer()" />
+    <button (click)="finishedTyping()">Done</button>
+    <h2>Accuracy: {{accuracy}}%</h2>
+    <h2>WordPerMinute Speed: {{wordPerMinute}}</h2>
+    <div *ngIf="accuracy">
+      <h2>Average Accuracy from all Users: {{averageTyper.accuracy}}%</h2>
+      <h2>Average WPM Speed from all Users: {{averageTyper.wpmSpeed}}</h2>
+      </div>
+  </div>
+
+  <div *ngIf="selectedGame.name == 'NotInteractive'">
+    <h2>{{intro}}</h2>
+    <h2>{{chosenPassage}}</h2>
+    <input value="" id="userInput" (keypress)="startTimer()" />
+    <button (click)="finishedTyping()">Done</button>
+    <h2>Your Accuracy: {{accuracy}}%</h2>
+    <h2>Your WordPerMinute Speed: {{wordPerMinute}}</h2>
+    <div *ngIf="accuracy">
+    <h2>Average Accuracy from all Users: {{averageTyper.accuracy}}%</h2>
+    <h2>Average WPM Speed from all Users: {{averageTyper.wpmSpeed}}</h2>
+    </div>
+  </div>
+</div>
